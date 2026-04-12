@@ -51,22 +51,15 @@ resource "oci_containerengine_node_pool" "this" {
   }
 
   node_config_details {
-    size = var.node_count
+    size          = var.node_count
     freeform_tags = var.tags
 
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
-      subnet_id           = var.private_subnet_id
-    }
-
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
-      subnet_id           = var.private_subnet_id
-    }
-
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[2].name
-      subnet_id           = var.private_subnet_id
+    dynamic "placement_configs" {
+      for_each = try(data.oci_identity_availability_domains.ads.availability_domains, [])
+      content {
+        availability_domain = placement_configs.value.name
+        subnet_id           = var.private_subnet_id
+      }
     }
   }
 
@@ -74,5 +67,5 @@ resource "oci_containerengine_node_pool" "this" {
 }
 
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = var.compartment_id
+  compartment_id = var.tenancy_ocid
 }

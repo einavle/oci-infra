@@ -46,6 +46,7 @@ module "oke" {
   source = "./modules/oke"
 
   compartment_id        = var.compartment_id
+  tenancy_ocid          = var.tenancy_ocid
   vcn_id                = module.vcn.vcn_id
   cluster_name          = var.cluster_name
   kubernetes_version    = var.kubernetes_version

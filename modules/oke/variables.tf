@@ -3,6 +3,11 @@ variable "compartment_id" {
   type        = string
 }
 
+variable "tenancy_ocid" {
+  description = "OCID of the tenancy"
+  type        = string
+}
+
 variable "vcn_id" {
   description = "OCID of the VCN"
   type        = string
