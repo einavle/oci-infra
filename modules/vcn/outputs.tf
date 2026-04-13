@@ -17,3 +17,8 @@ output "service_gateway_id" {
   description = "OCID of the Service Gateway"
   value       = oci_core_service_gateway.this.id
 }
+
+output "service_cidr_block" {
+  description = "Service CIDR block label for the region (used in route tables)"
+  value       = data.oci_core_services.all_services.services[0].cidr_block
+}

@@ -26,7 +26,7 @@ resource "oci_core_route_table" "private" {
   }
 
   route_rules {
-    destination       = "all-iad-services-in-oracle-services-network"
+    destination       = var.service_cidr_block
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = var.service_gateway_id
   }

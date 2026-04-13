@@ -43,6 +43,11 @@ variable "private_subnet_dns_label" {
   type        = string
 }
 
+variable "service_cidr_block" {
+  description = "Service CIDR block label for the region (from oci_core_services data source)"
+  type        = string
+}
+
 variable "tags" {
   description = "Free-form tags"
   type        = map(string)

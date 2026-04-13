@@ -32,7 +32,7 @@ variable "region" {
 variable "compartment_id" {
   description = "OCID of the compartment to create resources in"
   type        = string
-  default     = "ocid1.compartment.oc1..aaaaaaaavkmb2q3w3q6m2zftkv57hgtj2kptpzopqy3y5jq36s6av4c7hpha"
+  default     = "ocid1.compartment.oc1..aaaaaaaaided5ezscmp764ox4wa5rjth3ca6rhzuznk5r7fqdd3rysalig3q"
 }
 
 # VCN
@@ -132,7 +132,7 @@ variable "node_count" {
 variable "ssh_public_key" {
   description = "SSH public key to install on worker nodes"
   type        = string
-  default     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw46syJu7ilTxQDjgrFflJFyT/H/Slce9oNMy05DacJ2iVrAGU7F1LJmPRiNXXWorTBbai1N6cINMfruB7IShgZ27x074uZYfJ8E8g6xMTBhMDOAAOf7WoQ/ZeObcxPVGMaw5agR9Lt9GeahjeqRan4upyXY2WB8BIe12KgyDdO/BxZihuNYGJWDJsI5XePRzypRB/QKxNULLvCUFDAY6A2L0wGmM2ySACuHd1EMzOKikLTfI2ze3FSPLVO3ayiQYgako2d/Uzw57pz/QpvgEDnflvUOYR6DVIXgTlhRi+uHf1JB3zF+ZwRgdCrnV+PxVSR3EUoSRPuGjFlYmur83wIDAQAB"
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDn6x5VPJ3FBw3VK8skV7jFBT/dUvTut27DiD/2KeCDH1v0EWVqnVPutVE7bNdm6X+fAk3Ye8JlMdkfGs7RAO74/zHQVlEmz7BQnquaoNmmAOHvrqFE68KIKF7QUVWWYQcf7KEQsLz3bQOY59SS3W0haMGrmLFgYj2am7Bjjrr2nQ5cHXWyStTazWh4QVFzjsqMB3yq7cV/xSRfoA/44N2FwOLrdVESV6UnotBxfs8xUFeddu6ucffqsw1BetxfkmHsKF/z9/kx6CLAxDtvJW6mNO1Q8GezkBLETixlFfz4u795bKQFyQ7PnZbxUOudyGhvVGXM2F57kjqKa5fIoyPaWLowK23x0MNTsIriVfJ12WBBREMykO72J9J+uZ1828HCe8PgJqPnfd/rZA/seuKWZEt4LjBDHd5/8u2qTKAeAv/kKDqmwu13XTEGDuVojEgJLFvxtlMKVaZ2PtbEbGHqIcRECaux4iXzOfDEvIc0lX2HR0SsjlGl88utTdx+wpF8zR2cNcPBlPjty1H0Zmu/hQDYwLkSDCb7MOKCYXz2n+2iY11l97QPgvx3UVN3NwNJIZuH+Jm8ZI9qGEHmvjZqHG0ZFEa9w27y0jkNiaJv1DUU34KoOkJwWvnG6IzpwhAbc6yOUVZoTSdIQiiZ3yKxaXv5qi9dDrwwEpIAhwYz1Q== root"
 }
 
 # Tags

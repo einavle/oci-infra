@@ -35,6 +35,7 @@ module "subnets" {
   internet_gateway_id        = module.vcn.internet_gateway_id
   nat_gateway_id             = module.vcn.nat_gateway_id
   service_gateway_id         = module.vcn.service_gateway_id
+  service_cidr_block         = module.vcn.service_cidr_block
   public_subnet_cidr         = var.public_subnet_cidr
   private_subnet_cidr        = var.private_subnet_cidr
   public_subnet_dns_label    = var.public_subnet_dns_label
