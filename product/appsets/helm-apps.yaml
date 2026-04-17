@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/einav.leyboshor/oci-infra.git
+        repoURL: https://github.com/einavle/oci-infra.git
         revision: HEAD
         directories:
           - path: product/helm/*
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/einav.leyboshor/oci-infra.git
+        repoURL: https://github.com/einavle/oci-infra.git
         targetRevision: HEAD
         path: "{{path}}"
       destination:
