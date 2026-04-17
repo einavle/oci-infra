@@ -1,4 +1,4 @@
-appServiceName: srv-app
+appServiceName: app-srv
 appServicePort: 80
 
 gateway:
