@@ -12,7 +12,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /
+            prefix: /srv1
       route:
         - destination:
             host: app-srv.app-srv.svc.cluster.local
