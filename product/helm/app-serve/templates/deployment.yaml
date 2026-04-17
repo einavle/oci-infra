@@ -22,5 +22,5 @@ spec:
             - containerPort: {{ .Values.service.port }}
           command: ["/bin/sh", "-c"]
           args:
-            - apk add --no-cache curl bind-tools && sleep infinity
+            - apk add --no-cache curl bind-tools && while true; do sleep 3600; done
           
