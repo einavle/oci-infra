@@ -1,4 +1,4 @@
-appServiceName: flask-app
+appServiceName: srv-app
 appServicePort: 80
 
 gateway:
