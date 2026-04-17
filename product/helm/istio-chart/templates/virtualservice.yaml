@@ -20,12 +20,14 @@ spec:
             host: app-srv.app-srv.svc.cluster.local
             port:
               number: {{ .Values.appServicePort }}
-    # - match:
-    #     - uri:
-    #         prefix: /srv2
-    #   route:
-    #     - destination:
-    #         host: app-srv2.app-srv2.svc.cluster.local
-    #         port:
-    #           number: {{ .Values.appServicePort }}
+    - match:
+        - uri:
+            prefix: /srv2
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: app-srv2.app-srv2.svc.cluster.local
+            port:
+              number: {{ .Values.appServicePort }}
 
