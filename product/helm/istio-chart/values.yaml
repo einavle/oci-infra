@@ -1,10 +1,10 @@
 appServiceName: flask-app
-appServicePort: 5000
+appServicePort: 80
 
 gateway:
   hosts:
-    - "flask.example.com"
+    - "app1.einav.com"
 
 virtualService:
   hosts:
-    - "flask.example.com"
+    - "app1.einav.com"
