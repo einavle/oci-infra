@@ -13,6 +13,8 @@ spec:
     - match:
         - uri:
             prefix: /srv1
+      rewrite:
+        uri: /
       route:
         - destination:
             host: app-srv.app-srv.svc.cluster.local
