@@ -3,8 +3,8 @@ replicaCount: 1
 image:
   # repository: il-jerusalem-1.ocir.io/axy2nbf6yimv/app1
   # tag: 02
-  repository: docker.io/library/nginx
-  tag: 1.16.1
+  repository: alpine
+  tag: 3.20
   pullPolicy: IfNotPresent
 
 service:
