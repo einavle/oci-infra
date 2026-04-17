@@ -15,6 +15,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: {{ .Values.appServiceName }}
+            host: {{ .Values.appServiceName }}.app-srv.svc.cluster.local
             port:
               number: {{ .Values.appServicePort }}
