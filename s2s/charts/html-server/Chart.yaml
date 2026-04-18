@@ -1,0 +1,6 @@
+apiVersion: v2
+name: html-server
+description: A simple nginx server that serves HTML and a JSON data endpoint
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
