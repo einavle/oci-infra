@@ -7,9 +7,9 @@ spec:
     istio: ingress-grpc
   servers:
     - port:
-        number: 443
-        name: grpc-tls
-        protocol: GRPC
+        number: 80
+        name: http-grpc
+        protocol: HTTP
       hosts:
         {{- range .Values.gatewayGrpc.hosts }}
         - {{ . | quote }}
