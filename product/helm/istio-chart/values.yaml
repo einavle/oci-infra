@@ -5,6 +5,10 @@ gateway:
   hosts:
     - "app1.einav.com"
 
+gatewayGrpc:
+  hosts:
+    - "app2.einav.com"
+
 virtualService:
   hosts:
     - "app1.einav.com"
