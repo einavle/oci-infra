@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bqsender-deployment
+  labels:
+    app: bqsender
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: bqsender
+  template:
+    metadata:
+      labels:
+        app: bqsender
+    spec:
+      imagePullSecrets:
+      - name: dockerhub
+      containers:
+      - name: bqsender
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        volumeMounts:
+        - name: gcpsa
+          mountPath: "/creds"
+        ports:
+        - containerPort: 5001
+      volumes:
+      - name: gcpsa
+        secret:
+          secretName: gcpsaci
