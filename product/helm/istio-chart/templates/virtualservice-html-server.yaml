@@ -8,9 +8,8 @@ spec:
     - {{ .Values.htmlServerVirtualService.host | quote }}
   http:
     - route:
-        - timeout: 0s
         - destination:
             host: {{ .Values.htmlServerVirtualService.host | quote }}
             port:
-              number: {{ .Values.htmlServerVirtualService.port | quote }}
+              number: {{ .Values.htmlServerVirtualService.port }}
 {{- end }}
