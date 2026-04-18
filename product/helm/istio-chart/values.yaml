@@ -17,3 +17,4 @@ htmlServerVirtualService:
   enabled: true
   host: html-server.html-server.svc.cluster.local
   port: 80
+  timeout: 0s
