@@ -11,7 +11,7 @@ service:
 
 # Reference to the html-server — override if deployed under a different release name or namespace
 htmlServer:
-  host: "html-server"
+  host: "html-server.html-server.svc.cluster.local"
   port: 80
   dataPath: "/data.json"
 
