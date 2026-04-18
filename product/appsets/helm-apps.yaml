@@ -4,7 +4,12 @@ metadata:
   name: product-helm-apps
   namespace: argocd
 spec:
+  goTemplate: true
   generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
     - git:
         repoURL: https://github.com/einavle/oci-infra.git
         revision: HEAD
@@ -12,13 +17,16 @@ spec:
           - path: product/helm/*
   template:
     metadata:
-      name: "{{path.basename}}"
+      name: '{{path.basename}}-{{ index .metadata.labels "env" }}-{{ index .metadata.labels "region" }}'
     spec:
       project: default
       source:
         repoURL: https://github.com/einavle/oci-infra.git
         targetRevision: HEAD
         path: "{{path}}"
+        helm:
+          valueFiles:
+            - '{{ index .metadata.labels "env" }}/{{ index .metadata.labels "region" }}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{path.basename}}"
