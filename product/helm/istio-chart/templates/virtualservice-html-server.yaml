@@ -8,6 +8,11 @@ spec:
     - {{ .Values.htmlServerVirtualService.host | quote }}
   http:
     - timeout: {{ .Values.htmlServerVirtualService.timeout }}
+      fault:
+        delay:
+          percentage:
+            value: 100
+          fixedDelay: {{ .Values.htmlServerVirtualService.faultDelay }}
       route:
         - destination:
             host: {{ .Values.htmlServerVirtualService.host | quote }}

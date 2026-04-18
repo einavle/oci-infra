@@ -18,3 +18,4 @@ htmlServerVirtualService:
   host: html-server.html-server.svc.cluster.local
   port: 80
   timeout: 1s
+  faultDelay: 3s
