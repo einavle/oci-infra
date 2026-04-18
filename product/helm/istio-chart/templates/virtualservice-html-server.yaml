@@ -12,7 +12,7 @@ spec:
         delay:
           percentage:
             value: {{ .Values.htmlServerVirtualService.faultPercentage }}
-          fixedDelay: {{ .Values.htmlServerVirtualService.faultDelay }}
+          # fixedDelay: {{ .Values.htmlServerVirtualService.faultDelay }}
       route:
         - destination:
             host: {{ .Values.htmlServerVirtualService.host | quote }}
