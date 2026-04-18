@@ -1,0 +1,16 @@
+{{- if .Values.htmlServerVirtualService.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-html-server-vs
+spec:
+  hosts:
+    - {{ .Values.htmlServerVirtualService.host | quote }}
+  http:
+    - route:
+        - timeout: 0s
+        - destination:
+            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            port:
+              number: {{ .Values.htmlServerVirtualService.port | quote }}
+{{- end }}

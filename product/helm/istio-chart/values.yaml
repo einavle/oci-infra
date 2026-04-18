@@ -12,3 +12,8 @@ gatewayGrpc:
 virtualService:
   hosts:
     - "app1.einav.com"
+
+htmlServerVirtualService:
+  enabled: true
+  host: html-server.html-server.svc.cluster.local
+  port: 80
