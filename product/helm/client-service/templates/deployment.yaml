@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "client-service.fullname" . }}
+  labels:
+    {{- include "client-service.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "client-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "client-service.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: client
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "/app/server.py"]
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: PORT
+              value: {{ .Values.service.port | quote }}
+            - name: HTML_SERVER_HOST
+              value: {{ .Values.htmlServer.host | quote }}
+            - name: HTML_SERVER_PORT
+              value: {{ .Values.htmlServer.port | quote }}
+            - name: HTML_SERVER_DATA_PATH
+              value: {{ .Values.htmlServer.dataPath | quote }}
+          volumeMounts:
+            - name: app
+              mountPath: /app
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+      volumes:
+        - name: app
+          configMap:
+            name: {{ include "client-service.fullname" . }}
