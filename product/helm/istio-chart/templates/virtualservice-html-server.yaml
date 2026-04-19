@@ -8,14 +8,38 @@ spec:
     - {{ .Values.htmlServerVirtualService.host | quote }}
   http:
     - timeout: {{ .Values.htmlServerVirtualService.timeout }}
-      fault:
-        delay:
-          percentage:
-            value: {{ .Values.htmlServerVirtualService.faultPercentage }}
-          # fixedDelay: {{ .Values.htmlServerVirtualService.faultDelay }}
       route:
+        {{- if .Values.htmlServerVirtualService.canary.enabled }}
+        - destination:
+            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            subset: stable
+            port:
+              number: {{ .Values.htmlServerVirtualService.port }}
+          weight: {{ sub 100 .Values.htmlServerVirtualService.canary.weight }}
+        - destination:
+            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            subset: canary
+            port:
+              number: {{ .Values.htmlServerVirtualService.port }}
+          weight: {{ .Values.htmlServerVirtualService.canary.weight }}
+        {{- else }}
         - destination:
             host: {{ .Values.htmlServerVirtualService.host | quote }}
             port:
               number: {{ .Values.htmlServerVirtualService.port }}
+        {{- end }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-html-server-dr
+spec:
+  host: {{ .Values.htmlServerVirtualService.host | quote }}
+  subsets:
+    - name: stable
+      labels:
+        version: {{ .Values.htmlServerVirtualService.canary.stableVersion }}
+    - name: canary
+      labels:
+        version: {{ .Values.htmlServerVirtualService.canary.canaryVersion }}
 {{- end }}
