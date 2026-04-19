@@ -4,14 +4,24 @@ appServicePort: 80
 gateway:
   hosts:
     - "app1.einav.com"
+    - "canary.einav.com"
 
 gatewayGrpc:
   hosts:
     - "app2.einav.com"
+    - "canary.einav.com"
 
 virtualService:
   hosts:
     - "app1.einav.com"
+
+canaryVirtualService:
+  enabled: true
+  host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+  port: 80
+  timeout: 1s
+  stableVersion: stable
+  canaryVersion: canary
 
 srvServerVirtualService:
   enabled: true

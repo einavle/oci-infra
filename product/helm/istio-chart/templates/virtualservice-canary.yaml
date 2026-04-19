@@ -1,0 +1,45 @@
+{{- if .Values.canaryVirtualService.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-canary-vs
+spec:
+  hosts:
+    - "canary.einav.com"
+    - {{ .Values.canaryVirtualService.host | quote }}
+  gateways:
+    - {{ .Release.Name }}-gateway
+  http:
+    - match:
+        - headers:
+            host:
+              exact: "canary.einav.com"
+      timeout: {{ .Values.canaryVirtualService.timeout }}
+      route:
+        - destination:
+            host: {{ .Values.canaryVirtualService.host | quote }}
+            subset: canary
+            port:
+              number: {{ .Values.canaryVirtualService.port }}
+    - timeout: {{ .Values.canaryVirtualService.timeout }}
+      route:
+        - destination:
+            host: {{ .Values.canaryVirtualService.host | quote }}
+            subset: stable
+            port:
+              number: {{ .Values.canaryVirtualService.port }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-canary-dr
+spec:
+  host: {{ .Values.canaryVirtualService.host | quote }}
+  subsets:
+    - name: stable
+      labels:
+        version: {{ .Values.canaryVirtualService.stableVersion }}
+    - name: canary
+      labels:
+        version: {{ .Values.canaryVirtualService.canaryVersion }}
+{{- end }}
