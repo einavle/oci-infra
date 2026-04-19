@@ -15,8 +15,13 @@ virtualService:
 
 htmlServerVirtualService:
   enabled: true
-  host: html-server.html-server.svc.cluster.local
+  host: app-srv-prod-il-jerusalem-1.happ-srv.svc.cluster.local
   port: 80
   timeout: 1s
   faultDelay: 0s
   faultPercentage: 0
+  stableVersion: stable
+  canaryVersion: canary
+  canary:
+    enabled: false
+    weight: 20
