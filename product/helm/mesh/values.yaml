@@ -1,0 +1,27 @@
+appServiceName: app-srv
+appServicePort: 80
+
+gateway:
+  hosts:
+    - "app1.einav.com"
+
+gatewayGrpc:
+  hosts:
+    - "app2.einav.com"
+
+virtualService:
+  hosts:
+    - "app1.einav.com"
+
+htmlServerVirtualService:
+  enabled: true
+  host: app-srv-prod-il-jerusalem-1.happ-srv.svc.cluster.local
+  port: 80
+  timeout: 1s
+  faultDelay: 0s
+  faultPercentage: 0
+  stableVersion: stable
+  canaryVersion: canary
+  canary:
+    enabled: false
+    weight: 20
