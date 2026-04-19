@@ -19,19 +19,19 @@ spec:
                 - path: product/helm/*/config.json
   template:
     metadata:
-      name: '{{ base (dir .path.path) }}-{{ index .metadata.labels "env" }}-{{ index .metadata.labels "region" }}'
+      name: '{{.path.basename}}-{{ index .metadata.labels "env" }}-{{ index .metadata.labels "region" }}'
     spec:
       project: default
       source:
         repoURL: https://github.com/einavle/oci-infra.git
         targetRevision: '{{ default "HEAD" .targetRevision }}'
-        path: '{{ dir .path.path }}'
+        path: "{{.path.path}}"
         helm:
           valueFiles:
             - '{{ index .metadata.labels "env" }}/{{ index .metadata.labels "region" }}/values.yaml'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ base (dir .path.path) }}'
+        namespace: "{{.path.basename}}"
       syncPolicy:
         automated:
           prune: true
