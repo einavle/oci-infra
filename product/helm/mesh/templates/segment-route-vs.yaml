@@ -2,7 +2,6 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: app-srv-vs
-  namespace: happ-srv
 spec:
   hosts:
   - app-srv-prod-il-jerusalem-1.happ-srv.svc.cluster.local
@@ -29,7 +28,6 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: app-srv-dr
-  namespace: happ-srv
 spec:
   host: app-srv-prod-il-jerusalem-1.happ-srv.svc.cluster.local
   subsets:
