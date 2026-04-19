@@ -13,9 +13,9 @@ virtualService:
   hosts:
     - "app1.einav.com"
 
-htmlServerVirtualService:
+srvServerVirtualService:
   enabled: true
-  host: html-server.html-server.svc.cluster.local
+  host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
   port: 80
   timeout: 1s
   faultDelay: 0s

@@ -1,32 +1,32 @@
-{{- if .Values.htmlServerVirtualService.enabled }}
+{{- if .Values.srvServerVirtualService.enabled }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: {{ .Release.Name }}-html-server-vs
 spec:
   hosts:
-    - {{ .Values.htmlServerVirtualService.host | quote }}
+    - {{ .Values.srvServerVirtualService.host | quote }}
   http:
-    - timeout: {{ .Values.htmlServerVirtualService.timeout }}
+    - timeout: {{ .Values.srvServerVirtualService.timeout }}
       route:
-        {{- if .Values.htmlServerVirtualService.canary.enabled }}
+        {{- if .Values.srvServerVirtualService.canary.enabled }}
         - destination:
-            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            host: {{ .Values.srvServerVirtualService.host | quote }}
             subset: stable
             port:
-              number: {{ .Values.htmlServerVirtualService.port }}
-          weight: {{ sub 100 .Values.htmlServerVirtualService.canary.weight }}
+              number: {{ .Values.srvServerVirtualService.port }}
+          weight: {{ sub 100 .Values.srvServerVirtualService.canary.weight }}
         - destination:
-            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            host: {{ .Values.srvServerVirtualService.host | quote }}
             subset: canary
             port:
-              number: {{ .Values.htmlServerVirtualService.port }}
-          weight: {{ .Values.htmlServerVirtualService.canary.weight }}
+              number: {{ .Values.srvServerVirtualService.port }}
+          weight: {{ .Values.srvServerVirtualService.canary.weight }}
         {{- else }}
         - destination:
-            host: {{ .Values.htmlServerVirtualService.host | quote }}
+            host: {{ .Values.srvServerVirtualService.host | quote }}
             port:
-              number: {{ .Values.htmlServerVirtualService.port }}
+              number: {{ .Values.srvServerVirtualService.port }}
         {{- end }}
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -34,12 +34,12 @@ kind: DestinationRule
 metadata:
   name: {{ .Release.Name }}-html-server-dr
 spec:
-  host: {{ .Values.htmlServerVirtualService.host | quote }}
+  host: {{ .Values.srvServerVirtualService.host | quote }}
   subsets:
     - name: stable
       labels:
-        version: {{ .Values.htmlServerVirtualService.canary.stableVersion }}
+        version: {{ .Values.srvServerVirtualService.canary.stableVersion }}
     - name: canary
       labels:
-        version: {{ .Values.htmlServerVirtualService.canary.canaryVersion }}
+        version: {{ .Values.srvServerVirtualService.canary.canaryVersion }}
 {{- end }}
