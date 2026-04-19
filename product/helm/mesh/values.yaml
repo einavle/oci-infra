@@ -13,8 +13,8 @@ virtualService:
   hosts:
     - "app1.einav.com"
 
-htmlServerVirtualService:
-  enabled: true
+canaryVs:
+  enabled: false
   host: app-srv-prod-il-jerusalem-1.happ-srv.svc.cluster.local
   port: 80
   timeout: 1s

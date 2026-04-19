@@ -8,6 +8,7 @@ gateway:
 gatewayGrpc:
   hosts:
     - "app2.einav.com"
+    - "canary.einav.com"
 
 virtualService:
   hosts:

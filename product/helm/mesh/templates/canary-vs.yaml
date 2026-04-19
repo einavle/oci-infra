@@ -1,0 +1,51 @@
+{{- if .Values.canaryVs.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-canary-vs
+spec:
+  hosts:
+    - {{ .Values.canaryVs.host | quote }}
+  http:
+    - timeout: {{ .Values.canaryVs.timeout }}
+      fault:
+        delay:
+          percentage:
+            value: {{ .Values.canaryVs.faultPercentage }}
+          # fixedDelay: {{ .Values.canaryVs.faultDelay }}
+      route:
+        {{- if .Values.canaryVs.canary.enabled }}
+        - destination:
+            host: {{ .Values.canaryVs.host | quote }}
+            subset: stable
+            port:
+              number: {{ .Values.canaryVs.port }}
+          weight: {{ sub 100 .Values.canaryVs.canary.weight }}
+        - destination:
+            host: {{ .Values.canaryVs.host | quote }}
+            subset: canary
+            port:
+              number: {{ .Values.canaryVs.port }}
+          weight: {{ .Values.canaryVs.canary.weight }}
+        {{- else }}
+        - destination:
+            host: {{ .Values.canaryVs.host | quote }}
+            subset: stable
+            port:
+              number: {{ .Values.canaryVs.port }}
+        {{- end }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-html-server-dr
+spec:
+  host: {{ .Values.canaryVs.host | quote }}
+  subsets:
+    - name: stable
+      labels:
+        version: {{ .Values.canaryVs.stableVersion }}
+    - name: canary
+      labels:
+        version: {{ .Values.canaryVs.canaryVersion }}
+{{- end }}
