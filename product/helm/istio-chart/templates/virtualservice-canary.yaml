@@ -8,7 +8,7 @@ spec:
     - "canary.einav.com"
     - {{ .Values.canaryVirtualService.host | quote }}
   gateways:
-    - {{ .Release.Name }}-gateway
+    - {{ .Release.Name }}-gateway-grpc
   http:
     - match:
         - headers:

@@ -31,7 +31,7 @@ srvServerVirtualService:
   faultDelay: 0s
   faultPercentage: 0
   canary:
-    enabled: false
+    enabled: true
     weight: 20
     stableVersion: stable
     canaryVersion: canary
