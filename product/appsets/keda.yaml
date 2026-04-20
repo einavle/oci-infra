@@ -1,21 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-ingress-grpc-keda
+  name: keda
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
 
   source:
-    repoURL: https://github.com/einavle/oci-infra.git
-    targetRevision: HEAD
-    path: product/keda/istio-ingress-grpc
+    repoURL: https://kedacore.github.io/charts
+    chart: keda
+    targetRevision: 2.16.1
+    helm:
+      releaseName: keda
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-ingress-grpc
+    namespace: keda
 
   syncPolicy:
     automated:
