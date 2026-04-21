@@ -10,16 +10,18 @@ spec:
   gateways:
     - {{ .Release.Name }}-gateway-grpc
   http:
+    {{- range .Values.gateway.features }}
     - match:
         - headers:
             host:
-              exact: feature1.einav.com
+              exact: {{ . }}
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
             subset: canary
             port:
-              number: {{ .Values.appServicePort }}
+              number: {{ $.Values.appServicePort }}
+    {{- end }}
     - route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
