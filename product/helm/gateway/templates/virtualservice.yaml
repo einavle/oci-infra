@@ -25,38 +25,18 @@ spec:
     - {{ .Release.Name }}-gateway
   http:
     - match:
-        - uri:
-            prefix: /srv1
-          headers:
+        - headers:
             host:
               exact: canary.einav.com
-      rewrite:
-        uri: /
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
             subset: canary
             port:
               number: {{ .Values.appServicePort }}
-    - match:
-        - uri:
-            prefix: /srv1
-      rewrite:
-        uri: /
-      route:
+    - route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
             subset: stable
             port:
               number: {{ .Values.appServicePort }}
-    - match:
-        - uri:
-            prefix: /srv2
-      rewrite:
-        uri: /
-      route:
-        - destination:
-            host: app-srv2-prod-il-jerusalem-1.app-srv2.svc.cluster.local
-            port:
-              number: {{ .Values.appServicePort }}
-
