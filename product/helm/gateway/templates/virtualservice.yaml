@@ -31,7 +31,7 @@ spec:
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
-            # subset: canary
+            subset: canary
             port:
               number: {{ .Values.appServicePort }}
     # - route:
