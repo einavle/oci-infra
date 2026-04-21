@@ -3,17 +3,16 @@ appServicePort: 80
 
 gateway:
   hosts:
-    - "stable.einav.com"
-    - "canary.einav.com"
+    - "sensor.einav.com"
+    - "feature1.einav.com"
+    - "feature2.einav.com"
 
-gatewayGrpc:
-  hosts:
-    - "app2.einav.com"
 
-virtualService:
-  hosts:
-    - "stable.einav.com"
-    - "canary.einav.com"
+  features:
+    - "feature1.einav.com"
+    - "feature2.einav.com"
+
+
 
 htmlServerVirtualService:
   enabled: true

@@ -4,17 +4,25 @@ metadata:
   name: {{ .Release.Name }}-vs-grpc
 spec:
   hosts:
-    {{- range .Values.gatewayGrpc.hosts }}
+    {{- range .Values.gateway.hosts }}
     - {{ . | quote }}
     {{- end }}
   gateways:
     - {{ .Release.Name }}-gateway-grpc
   http:
     - match:
-        - uri:
-            prefix: /
+        - headers:
+            host:
+              exact: feature1.einav.com
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+            subset: canary
+            port:
+              number: {{ .Values.appServicePort }}
+    - route:
+        - destination:
+            host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+            subset: stable
             port:
               number: {{ .Values.appServicePort }}

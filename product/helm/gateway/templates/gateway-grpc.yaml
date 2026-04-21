@@ -11,6 +11,6 @@ spec:
         name: http-grpc
         protocol: HTTP
       hosts:
-        {{- range .Values.gatewayGrpc.hosts }}
+        {{- range .Values.gateway.hosts }}
         - {{ . | quote }}
         {{- end }}

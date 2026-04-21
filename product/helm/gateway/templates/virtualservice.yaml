@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-vs
 spec:
   hosts:
-    {{- range .Values.virtualService.hosts }}
+    {{- range .Values.gateway.hosts }}
     - {{ . | quote }}
     {{- end }}
   gateways:
@@ -13,7 +13,7 @@ spec:
     - match:
         - headers:
             host:
-              exact: canary.einav.com
+              exact: feature1.einav.com
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
