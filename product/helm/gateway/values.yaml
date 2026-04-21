@@ -12,7 +12,8 @@ gatewayGrpc:
 
 virtualService:
   hosts:
-    - "app1.einav.com"
+    - "stable.einav.com"
+    - "canary.einav.com"
 
 htmlServerVirtualService:
   enabled: true

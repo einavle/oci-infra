@@ -1,4 +1,18 @@
 apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-srv1-dr
+spec:
+  host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+  subsets:
+    - name: canary
+      labels:
+        version: canary
+    - name: stable
+      labels:
+        version: stable
+---
+apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: {{ .Release.Name }}-vs
@@ -13,11 +27,26 @@ spec:
     - match:
         - uri:
             prefix: /srv1
+          headers:
+            host:
+              exact: canary.einav.com
       rewrite:
         uri: /
       route:
         - destination:
             host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+            subset: canary
+            port:
+              number: {{ .Values.appServicePort }}
+    - match:
+        - uri:
+            prefix: /srv1
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: app-srv-prod-il-jerusalem-1.app-srv.svc.cluster.local
+            subset: stable
             port:
               number: {{ .Values.appServicePort }}
     - match:
