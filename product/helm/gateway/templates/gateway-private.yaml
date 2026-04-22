@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ .Release.Name }}-gateway-private
+spec:
+  selector:
+    istio: ingress-private
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        {{- range .Values.gateway-private.hosts }}
+        - {{ . | quote }}
+        {{- end }}
