@@ -7,14 +7,16 @@ gateway:
     - "feature1.einav.com"
     - "feature2.einav.com"
 
+  features:
+    - "feature1.einav.com"
+    - "feature2.einav.com"
+
 gateway-private:
   hosts:
     - "kiali.einav.com"
 
 
-features:
-  - "feature1.einav.com"
-  - "feature2.einav.com"
+
 
 
 
