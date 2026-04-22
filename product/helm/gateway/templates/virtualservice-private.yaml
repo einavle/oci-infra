@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}-private-vs
 spec:
   hosts:
-    {{- range .Values.gateway.hosts }}
+    {{- range (index .Values "gateway-private").hosts }}
     - {{ . | quote }}
     {{- end }}
   gateways:
@@ -13,7 +13,7 @@ spec:
     - match:
         - headers:
             host:
-              exact: kiali.einav.com/kiali
+              exact: kiali.einav.com
       route:
         - destination:
             host: kiali.istio-system.svc.cluster.local

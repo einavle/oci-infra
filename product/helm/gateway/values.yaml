@@ -8,6 +8,7 @@ gateway:
     - "feature2.einav.com"
 
 gateway-private:
+  hosts:
     - "kiali.einav.com"
 
 

@@ -11,6 +11,6 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        {{- range .Values.gateway-private.hosts }}
+        {{- range (index .Values "gateway-private").hosts }}
         - {{ . | quote }}
         {{- end }}
