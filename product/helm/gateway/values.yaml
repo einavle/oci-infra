@@ -4,12 +4,14 @@ appServicePort: 80
 gateway:
   hosts:
     - "sensor.einav.com"
+    - "srv1.israel-takeaway.com"
     - "feature1.einav.com"
     - "feature2.einav.com"
 
   features:
     - "feature1.einav.com"
     - "feature2.einav.com"
+    - "srv1.israel-takeaway.com"
 
 gateway-private:
   hosts:
