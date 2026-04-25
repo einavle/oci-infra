@@ -11,7 +11,7 @@ gateway:
   features:
     - "feature1.einav.com"
     - "feature2.einav.com"
-    - "srv1.israel-takeaway.com"
+    # - "srv1.israel-takeaway.com"
 
 gateway-private:
   hosts:
