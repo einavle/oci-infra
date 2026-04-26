@@ -4,7 +4,6 @@ appServicePort: 80
 gateway:
   hosts:
     - "argocd.israel-takeaway.com"
-    - "*.israel-takeaway.com"
     - "sensor.einav.com"
     - "israel-takeaway.com"
     - "srv1.israel-takeaway.com"
