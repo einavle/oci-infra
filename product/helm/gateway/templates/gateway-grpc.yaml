@@ -6,11 +6,15 @@ spec:
   selector:
     istio: ingress-grpc
   servers:
-    - port:
-        number: 80
-        name: http-grpc
-        protocol: HTTP
-      hosts:
-        {{- range .Values.gateway.hosts }}
-        - {{ . | quote }}
-        {{- end }}
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+      {{- range .Values.gateway.hosts }}
+      - {{ . | quote }}
+      {{- end }}
+    tls:
+      mode: SIMPLE
+      credentialName: israel-takeaway-tls
+  
