@@ -9,6 +9,7 @@ spec:
     {{- end }}
   gateways:
     - {{ .Release.Name }}-gateway
+    - {{ .Release.Name }}-gateway-grpc
   http:
     {{- range .Values.gateway.features }}
     - match:
