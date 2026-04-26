@@ -11,6 +11,15 @@ spec:
     - {{ .Release.Name }}-gateway
     - {{ .Release.Name }}-gateway-grpc
   http:
+    - match:
+        - headers:
+            host:
+              exact: argocd.israel-takeaway.com
+      route:
+        - destination:
+            host: argocd-server.argocd.svc.cluster.local
+            port:
+              number: 80
     {{- range .Values.gateway.features }}
     - match:
         - headers:
